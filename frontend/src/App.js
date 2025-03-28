@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import { useCallback } from 'react';
+const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -21,7 +22,7 @@ function App() {
   const fetchMessages = useCallback(async (limitValue = limit) => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:5000/api/messages?limit=${limitValue}`);
+      const res = await axios.get(`${API_URL}/api/messages?limit=${limitValue}`);
       setMessages(res.data);
     } catch (err) {
       console.error('Failed to fetch messages:', err.message);
